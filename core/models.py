@@ -30,6 +30,7 @@ class Employee(models.Model):
     def __str__(self):
         return self.name
 
+
 class Visit(models.Model):
     salon = models.ForeignKey(Salon, related_name='visit', on_delete=models.CASCADE, null=True)
     employee = models.ForeignKey(Employee, related_name='visit', on_delete=models.CASCADE, null=True)
