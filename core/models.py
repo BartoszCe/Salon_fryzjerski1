@@ -8,6 +8,8 @@ class Salon(models.Model):
     name = models.CharField(max_length=40, blank=True)
     adres = models.CharField(max_length=40, blank=True)
     strona_internetowa = models.URLField(max_length=200, blank=True)
+    image = models.ImageField(upload_to='images/', default='images/default.jpg')
+    objects = models.Manager()
 
     class Meta:
         verbose_name_plural = 'salons'
@@ -25,10 +27,11 @@ class Employee(models.Model):
     phone_number = PhoneNumberField(max_length=12, blank=True)
 
     class Meta:
-        verbose_name_plural = 'Employees'
+        verbose_name_plural = 'employees'
 
     def __str__(self):
         return self.name
+
 
 class Visit(models.Model):
     salon = models.ForeignKey(Salon, related_name='visit', on_delete=models.CASCADE, null=True)
@@ -37,19 +40,19 @@ class Visit(models.Model):
     start_time = models.TimeField(verbose_name="Start Time")
     date = models.DateField(verbose_name="Date")
     comment = models.TextField(verbose_name="Comment", blank=True, null=True)
-    related_activity = models.ManyToManyField('Activity', verbose_name="Related Activities", blank=True)
+    # related_activity = models.ManyToManyField('Activity', verbose_name="Related Activities", blank=True)
 
     def __str__(self):
         return self.name + " " + str(self.start_time) + " " + str(self.date)
 
-    def save(self, *args, **kwargs):
-        if(self.id != None):
-            for i in self.related_activity.all():
-                i.delete()
-        super().save(*args, **kwargs)
-
-    def delete(self, using=None, keep_parents=False):
-        return super().delete()
+    # def save(self, *args, **kwargs):
+    #     if(self.id != None):
+    #         for i in self.related_activity.all():
+    #             i.delete()
+    #     super().save(*args, **kwargs)
+    #
+    # def delete(self, using=None, keep_parents=False):
+    #     return super().delete()
 
     class Meta:
         verbose_name = "Visit"

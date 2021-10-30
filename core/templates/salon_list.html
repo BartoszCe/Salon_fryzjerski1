@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+  <ul>
+    {% for salon in object_list %}
+      <li>
+        {{salon.name}}
+        <a href="{% url 'core:salon_detail' salon.pk %}">Detail</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
