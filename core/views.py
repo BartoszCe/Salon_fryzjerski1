@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from phonenumbers.unicode_util import Category
 
 from .forms import ChangePasswordForm
-from .models import Salon, Employee, Visit
+from .models import Salon, Employee
 from django.views.generic import DetailView, ListView
 
 
@@ -18,11 +18,6 @@ def salon_list(request):
 def employee_detail(request):
     employee = get_object_or_404(Employee)
     return render(request, 'detail.html', {'employee': employee})
-
-
-def visit_detail(request):
-    visit = get_object_or_404(Visit)
-    return render(request, 'detail_visit.html', {'visit': visit})
 
 
 class CustomLoginView(LoginView):

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% if request.user.if_authenticated %}
+
+  <a href=" ">Logout</a>
+{% endif %}
+
+
+{% block content %}
+  Nazwa:  {{salon.name}}
+  Adres:  {{salon.adres}}
+  WWW:  {{salon.strona_internetowa}}
+
+<main>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="pb-3 h5">{{salon.name}}</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+        {% for employee in employees %}
+
+        <div class="col">
+          <div class="card shadow-sm">
+
+            <div class="card-body">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none">{{ employee.name }}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+    <a href="{% url 'calendary:main_calendar' %}">Terminarz</a>
+
+{% endblock %}
