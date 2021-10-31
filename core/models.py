@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
 
@@ -24,6 +26,7 @@ class Salon(models.Model):
 
 class Employee(models.Model):
     salon = models.ForeignKey(Salon, related_name='employee', on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=40)
     surname = models.CharField(max_length=20, blank=True)
     date_of_birth = models.DateField(default=timezone.now)
